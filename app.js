@@ -1,20 +1,23 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 //routes
-const stuffRoutes = require('./routes/stuff');
-const userRoutes = require('./routes/user');
+const stuffRoutes = require("./routes/stuff");
+const userRoutes = require("./routes/user");
 
 const app = express();
 
 //db connection
-mongoose.connect('mongodb+srv://sharifusa:qwertyuiop@cluster0.d5c17.mongodb.net/<dbname>?retryWrites=true&w=majority')
+mongoose
+  .connect(
+    "mongodb+srv://sharifusa:qwertyuiop@cluster0.d5c17.mongodb.net/<dbname>?retryWrites=true&w=majority"
+  )
   .then(() => {
-    console.log('Successfully connected to MongoDB Atlas!');
+    console.log("Successfully connected to MongoDB Atlas!");
   })
   .catch((error) => {
-    console.log('Unable to connect to MongoDB Atlas!');
+    console.log("Unable to connect to MongoDB Atlas!");
     console.error(error);
   });
 
@@ -34,10 +37,7 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 
 // app routes
-app.use('/api/stuff', stuffRoutes);
-app.use('/api/auth', userRoutes);
-
-
-
+app.use("/api/stuff", stuffRoutes);
+app.use("/api/auth", userRoutes);
 
 module.exports = app;
